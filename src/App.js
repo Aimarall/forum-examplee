@@ -26,7 +26,7 @@ function App() {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [zip, setZip] = useState(0);
-  
+
   return (
     <div className="App">
       <div>
@@ -154,6 +154,8 @@ function App() {
           value={zip}
           onChange={({ target }) => setZip(target.value)} />
       </div>
+
+
       <ul>
         <li>{firstName}</li>
         <li>{lastName}</li>
@@ -166,6 +168,7 @@ function App() {
         <li>{address}</li>
         <li>{city}</li>
         <li>{zip}</li>
+
       </ul>
     </div>
   );
