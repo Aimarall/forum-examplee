@@ -1,79 +1,62 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function App() {
-  const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    gender: "",
-    dateOfBirth: "",
-    languages: [],
-    education: "",
-    address: "",
-    city: "",
-    zip: 0,
-  });
-
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [gender, setGender] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [languages, setLanguages] = useState([]);
-  const [education, setEducation] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [zip, setZip] = useState(0);
+  function formSubmitCallback(event) {
+    const form = new FormData(event.target);
+    const data = {
+      firstName: form.get('firstName'),
+      lastName: form.get('lastName')
+    }
+    event.preventDefault();
+  }
+  const [examplee, setExample] = useState("Lodaing...")
+  useEffect(() => {
+    axios.get('https://forum-examplee-default-rtdb.firebaseio.com/examplee.json')
+      .then(response => {
+        setExample(response.data);
+      });
+  }, []);
 
   return (
-    <div className="App">
+    <form className="App" onSubmit={formSubmitCallback}>
       <div>
         <label for="firstName">First name</label>
         <input type="text"
           name="firstName"
-          id="firstName"
-          value={firstName}
-          onChange={({ target }) => setFirstName(target.value)} />
+          id="firstName" />
       </div>
       <div>
         <label for="lastName">Last name</label>
         <input type="text"
           name="lastName"
-          id="lastName"
-          value={lastName}
-          onChange={({ target }) => setLastName(target.value)} />
+          id="lastName" />
       </div>
       <div>
         <label for="email">Email</label>
         <input type="email"
           name="email"
           id="email"
-          value={email}
-          onChange={({ target }) => setEmail(target.value)} />
+          required />
       </div>
       <div>
         <label for="phone">Phone</label>
         <input type="tel"
           name="phone"
-          id="phone"
-          value={phone}
-          onChange={({ target }) => setPhone(target.value)} />
+          id="phone" 
+          minLength={10}
+          maxLength={10}/>
       </div>
       <div>
         <label for="dateOfBirth">Date of birth</label>
         <input type="date"
           name="dateOfBirth"
-          id="dateOfBirth"
-          value={dateOfBirth}
-          onChange={({ target }) => setDateOfBirth(target.value)} />
+          id="dateOfBirth" />
       </div>
       <div>
         <label for="gender">Gender</label>
         <select name="gender"
-          id="gender"
-          onChange={({ target }) => setGender(target.value)}>
+          id="gender">
           <option>- Select -</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
@@ -86,8 +69,7 @@ function App() {
             <input type="radio"
               name="education"
               id="school"
-              value="school"
-              onClick={({ target }) => setEducation(target.value)} /> School
+              value="school" /> School
           </label>
         </div>
         <div>
@@ -95,8 +77,7 @@ function App() {
             <input type="radio"
               name="education"
               id="university"
-              value="university"
-              onClick={({ target }) => setEducation(target.value)} /> University
+              value="university" /> University
           </label>
         </div>
       </div>
@@ -107,8 +88,7 @@ function App() {
             <input type="checkbox"
               name="language"
               id="english"
-              value="english"
-              onChange={({ target }) => setLanguages(target.value)} /> English
+              value="english" /> English
           </label>
         </div>
         <div>
@@ -116,8 +96,7 @@ function App() {
             <input type="checkbox"
               name="language"
               id="kyrgyz"
-              value="kyrgyz"
-              onChange={({ target }) => setLanguages(target.value)} /> Kyrgyz
+              value="kyrgyz" /> Kyrgyz
           </label>
         </div>
         <div>
@@ -125,8 +104,7 @@ function App() {
             <input type="checkbox"
               name="language"
               id="russian"
-              value="russian"
-              onChange={({ target }) => setLanguages(target.value)} /> Russian
+              value="russian" /> Russian
           </label>
         </div>
       </div>
@@ -134,43 +112,26 @@ function App() {
         <label for="address">Address</label>
         <input type="text"
           name="address"
-          id="address"
-          value={address}
-          onChange={({ target }) => setAddress(target.value)} />
+          id="address" />
       </div>
       <div>
         <label for="city">City</label>
         <input type="text"
           name="city"
-          id="city"
-          value={city}
-          onChange={({ target }) => setCity(target.value)} />
+          id="city" />
       </div>
       <div>
         <label for="zip">ZIP</label>
         <input type="number"
           name="zip"
-          id="zip"
-          value={zip}
-          onChange={({ target }) => setZip(target.value)} />
+          id="zip" 
+          min={720000}
+          max={729999}/>
       </div>
-
-
-      <ul>
-        <li>{firstName}</li>
-        <li>{lastName}</li>
-        <li>{dateOfBirth}</li>
-        <li>{email}</li>
-        <li>{phone}</li>
-        <li>{gender}</li>
-        <li>{education}</li>
-        <li>{languages}</li>
-        <li>{address}</li>
-        <li>{city}</li>
-        <li>{zip}</li>
-
-      </ul>
-    </div>
+      <div>
+        <button>Submit</button>
+      </div>
+    </form>
   );
 }
 export default App;
