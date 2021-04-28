@@ -12,6 +12,9 @@ form > div > label::after {
   margin-left: .5rem;
   display: none;
 }
+.submitted input:valid {
+  border: 1px solid rgb(88, 206, 98);
+}
 input:invalid {
   border: 1px solid tomato;
 }
