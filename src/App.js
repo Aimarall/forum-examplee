@@ -25,12 +25,14 @@ function App() {
         <input type="text"
           name="firstName"
           id="firstName" />
+          <span className="error">First bname is required</span>
       </div>
       <div>
         <label for="lastName">Last name</label>
         <input type="text"
           name="lastName"
           id="lastName" />
+          <span className="error">First bname is required</span>
       </div>
       <div>
         <label for="email">Email</label>
@@ -38,20 +40,23 @@ function App() {
           name="email"
           id="email"
           required />
+          <span className="error">First bname is required</span>
       </div>
       <div>
         <label for="phone">Phone</label>
         <input type="tel"
           name="phone"
-          id="phone" 
+          id="phone"
           minLength={10}
-          maxLength={10}/>
+          maxLength={10} />
+          <span className="error">First bname is required</span>
       </div>
       <div>
         <label for="dateOfBirth">Date of birth</label>
         <input type="date"
           name="dateOfBirth"
           id="dateOfBirth" />
+          <span className="error">First bname is required</span>
       </div>
       <div>
         <label for="gender">Gender</label>
@@ -124,9 +129,9 @@ function App() {
         <label for="zip">ZIP</label>
         <input type="number"
           name="zip"
-          id="zip" 
+          id="zip"
           min={720000}
-          max={729999}/>
+          max={729999} />
       </div>
       <div>
         <button>Submit</button>
