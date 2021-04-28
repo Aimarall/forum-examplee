@@ -1,3 +1,24 @@
+form > div {
+  padding: .2rem 1rem;
+}
+form > div > label {
+  margin-right: .5rem;
+}
+form > div > label::after {
+  content: ":";
+}
+.error {
+  color: red;
+  margin-left: .5rem;
+  display: none;
+}
+input:invalid {
+  border: 1px solid tomato;
+}
+input:invalid + .error {
+  display: inline;
+}
+
 .App {
   text-align: center;
 }
